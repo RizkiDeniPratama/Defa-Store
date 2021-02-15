@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Button,
   Text,
@@ -39,7 +39,7 @@ export class Akun extends Component {
       .then(resJson => {
         console.log('darirofil', resJson);
         if (resJson) {
-          this.setState({ data: resJson.data });
+          this.setState({data: resJson.data});
         }
       })
       .catch(error => {
@@ -49,14 +49,13 @@ export class Akun extends Component {
   componentDidMount() {
     AsyncStorage.getItem('token').then(value => {
       if (value != null) {
-        this.setState({ token: value }, () => {
+        this.setState({token: value}, () => {
           this.user();
         });
       } else {
         console.log('token tidak ada');
       }
     });
-
   }
 
   logout = () => {
@@ -68,21 +67,19 @@ export class Akun extends Component {
       'keluar',
       'Yakin ingin keluar ?',
       [
-
         {
           text: 'Batal',
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
-        { text: 'logout', onPress: () => this.logout() },
+        {text: 'logout', onPress: () => this.logout()},
       ],
-      { cancelable: false },
+      {cancelable: false},
     );
   };
   render() {
-
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         {this.state.token == '' ? (
           <View>
             <Button
@@ -91,102 +88,106 @@ export class Akun extends Component {
             />
           </View>
         ) : (
-            <View style={{ flex: 1 }}>
-              <View style={styles.header}>
-                <Text>ACCOUNT</Text>
-              </View>
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 20 }}>
-                <View style={styles.layerUser}>
-                  <Image
-                    source={{ uri: this.state.data.avatar }}
-                    style={styles.akun}
-                  />
-
-                  <View>
-                    <View style={styles.dataUser}>
-                      <IonIcons name="person-sharp" size={20} />
-                      <Text style={styles.apiUser}>{this.state.data.name}</Text>
-                    </View>
-
-                    <View style={styles.dataUser}>
-                      <IonIcons name="call-sharp" size={20} />
-                      <Text style={styles.apiUser}>
-                        {this.state.data.no_telpon}
-                      </Text>
-                    </View>
-
-                    <View style={styles.dataUser}>
-                      <IonIcons name="location-sharp" size={20} />
-                      <Text style={styles.apiUser}>{this.state.data.alamat}</Text>
-                    </View>
-                  </View>
-
-                  <View>
-                    <View style={styles.dataUser2}>
-                      <IonIcons name="mail" size={20} />
-                      <Text style={styles.apiUser}>{this.state.data.email}</Text>
-                    </View>
-                  </View>
-                </View>
-              </ScrollView>
-              <View style={styles.list}>
-                <View style={{ width: '100%' }}>
-                  <Text style={styles.textList}>Additional Services</Text>
-                  <View style={styles.gayaList} />
-                </View>
-              </View>
-              <ScrollView>
-                {/* edir data user*/}
-                <TouchableOpacity
-                  style={styles.kotaklist}
-                  onPress={() => this.props.navigation.navigate('Edituser', { data: this.state.data })}>
-                  <View style={{ flexDirection: 'row' }}>
-                    <FontAwesome5 name="user-edit" size={20} />
-                    <Text style={{ marginLeft: 20 }}>editakun</Text>
-                  </View>
-                  <IonIcons name="chevron-forward-sharp" size={20} />
-                </TouchableOpacity>
-                {/* keranjang */}
-                <TouchableOpacity
-                  style={styles.kotaklist}
-                  onPress={() => this.props.navigation.navigate('Keranjang')}>
-                  <View style={{ flexDirection: 'row' }}>
-                    <MaterialIcons name="local-grocery-store" size={20} />
-                    <Text style={{ marginLeft: 20 }}>keranjang</Text>
-                  </View>
-                  <IonIcons name="chevron-forward-sharp" size={20} />
-                </TouchableOpacity>
-                {/* buka toko */}
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('Registrasi')}
-                  style={styles.kotaklist}>
-                  <View style={{ flexDirection: 'row' }}>
-                    <MaterialIcons name="add-business" size={20} />
-                    <Text style={{ marginLeft: 20 }}>buka toko</Text>
-                  </View>
-                  <IonIcons name="chevron-forward-sharp" size={20} />
-                </TouchableOpacity>
-                {/* ke toko */}
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('Toko')}
-                  style={styles.kotaklist}>
-                  <View style={{ flexDirection: 'row' }}>
-                    <MaterialIcons name="add-business" size={20} />
-                    <Text style={{ marginLeft: 20 }}>Toko mu</Text>
-                  </View>
-                  <IonIcons name="chevron-forward-sharp" size={20} />
-                </TouchableOpacity>
-              </ScrollView>
-              <TouchableOpacity
-                onPress={() => this.konfirmasilogout()}
-                style={styles.logOut}>
-                <Text style={styles.titlelog}>Log Out</Text>
-              </TouchableOpacity>
+          <View style={{flex: 1}}>
+            <View style={styles.header}>
+              <Text>ACCOUNT</Text>
             </View>
-          )}
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{flexGrow: 1, paddingHorizontal: 20}}>
+              <View style={styles.layerUser}>
+                <Image
+                  source={{uri: this.state.data.avatar}}
+                  style={styles.akun}
+                />
+
+                <View>
+                  <View style={styles.dataUser}>
+                    <IonIcons name="person-sharp" size={20} />
+                    <Text style={styles.apiUser}>{this.state.data.name}</Text>
+                  </View>
+
+                  <View style={styles.dataUser}>
+                    <IonIcons name="call-sharp" size={20} />
+                    <Text style={styles.apiUser}>
+                      {this.state.data.no_telpon}
+                    </Text>
+                  </View>
+
+                  <View style={styles.dataUser}>
+                    <IonIcons name="location-sharp" size={20} />
+                    <Text style={styles.apiUser}>{this.state.data.alamat}</Text>
+                  </View>
+                </View>
+
+                <View>
+                  <View style={styles.dataUser2}>
+                    <IonIcons name="mail" size={20} />
+                    <Text style={styles.apiUser}>{this.state.data.email}</Text>
+                  </View>
+                </View>
+              </View>
+            </ScrollView>
+            <View style={styles.list}>
+              <View style={{width: '100%'}}>
+                <Text style={styles.textList}>Additional Services</Text>
+                <View style={styles.gayaList} />
+              </View>
+            </View>
+            <ScrollView>
+              {/* edir data user*/}
+              <TouchableOpacity
+                style={styles.kotaklist}
+                onPress={() =>
+                  this.props.navigation.navigate('Edituser', {
+                    data: this.state.data,
+                  })
+                }>
+                <View style={{flexDirection: 'row'}}>
+                  <FontAwesome5 name="user-edit" size={20} />
+                  <Text style={{marginLeft: 20}}>editakun</Text>
+                </View>
+                <IonIcons name="chevron-forward-sharp" size={20} />
+              </TouchableOpacity>
+              {/* keranjang */}
+              <TouchableOpacity
+                style={styles.kotaklist}
+                onPress={() => this.props.navigation.navigate('Keranjang')}>
+                <View style={{flexDirection: 'row'}}>
+                  <MaterialIcons name="local-grocery-store" size={20} />
+                  <Text style={{marginLeft: 20}}>keranjang</Text>
+                </View>
+                <IonIcons name="chevron-forward-sharp" size={20} />
+              </TouchableOpacity>
+              {/* buka toko */}
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Registrasi')}
+                style={styles.kotaklist}>
+                <View style={{flexDirection: 'row'}}>
+                  <MaterialIcons name="add-business" size={20} />
+                  <Text style={{marginLeft: 20}}>buka toko</Text>
+                </View>
+                <IonIcons name="chevron-forward-sharp" size={20} />
+              </TouchableOpacity>
+              {/* ke toko */}
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Toko')}
+                style={styles.kotaklist}>
+                <View style={{flexDirection: 'row'}}>
+                  <MaterialIcons name="add-business" size={20} />
+                  <Text style={{marginLeft: 20}}>Toko mu</Text>
+                </View>
+                <IonIcons name="chevron-forward-sharp" size={20} />
+              </TouchableOpacity>
+            </ScrollView>
+            <TouchableOpacity
+              onPress={() => this.konfirmasilogout()}
+              style={styles.logOut}>
+              <Text style={styles.titlelog}>Log Out</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     );
   }
@@ -204,7 +205,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     shadowOpacity: 1,
-    backgroundColor: '#c9d8e3',
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,
   },
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     width: 130,
     height: 130,
-    marginTop: 20
+    marginTop: 20,
   },
   dataUser: {
     flexDirection: 'row',

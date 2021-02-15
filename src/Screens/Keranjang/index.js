@@ -11,7 +11,7 @@ import {
   ScrollView,
   Button,
   Dimensions,
-  Alert
+  Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -22,7 +22,7 @@ class Keranjang extends Component {
   constructor() {
     super();
     this.state = {
-     token:'',
+      token: '',
       data: [],
     };
   }
@@ -48,7 +48,7 @@ class Keranjang extends Component {
       });
   };
 
-  Delete = (id_product) => {
+  Delete = id_product => {
     console.log('menghapus');
     const url = `https://defa-store.herokuapp.com/api/user/delete_di_cart/product/${id_product}`;
     fetch(url, {
@@ -59,24 +59,23 @@ class Keranjang extends Component {
         Authorization: `Bearer ${this.state.token}`,
       },
     })
-      .then((respon) => respon.json())
-      .then((resJson) => {
+      .then(respon => respon.json())
+      .then(resJson => {
         console.log(resJson);
         if (resJson.status == 'success') {
-         ToastAndroid.show('barang sudah modar',ToastAndroid.SHORT)
-        this.keranjang()
+          ToastAndroid.show('barang sudah modar', ToastAndroid.SHORT);
+          this.keranjang();
         } else {
           console.log('gagal menghapus');
         }
-      
       })
-      .catch((error) => {
+      .catch(error => {
         console.log('error is' + error);
       });
   };
 
   componentDidMount() {
-    AsyncStorage.getItem('token').then((token) => {
+    AsyncStorage.getItem('token').then(token => {
       if (token != null) {
         this.setState({token: token}, () => {
           this.keranjang();
@@ -91,15 +90,14 @@ class Keranjang extends Component {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         {this.state.token != '' && (
-        <>
-        <View style={{height: 20}} />
-        <Text style={{fontSize: 30, fontWeight: 'bold', color: '#33c37d'}}>
-          Keranjang Kamu
-        </Text>
-     <View style={{height: 10}} />
-     </>
-        )
-}
+          <>
+            <View style={{height: 20}} />
+            <Text style={{fontSize: 30, fontWeight: 'bold', color: '#33c37d'}}>
+              Keranjang Kamu
+            </Text>
+            <View style={{height: 10}} />
+          </>
+        )}
         <View style={{flex: 1}}>
           <ScrollView>
             <View style={{flex: 1}}>
@@ -159,12 +157,10 @@ class Keranjang extends Component {
                             </Text>
                             <Text>kategori</Text>
                           </View>
-                          <TouchableOpacity 
-                          onPress = {() => this.Delete(val.id_product)}
-                          style={{alignSelf: 'flex-end'}}>
-                            <IonIcons
-                            
-                            name="trash" size={30} color='red' />
+                          <TouchableOpacity
+                            onPress={() => this.Delete(val.id_product)}
+                            style={{alignSelf: 'flex-end'}}>
+                            <IonIcons name="trash" size={30} color="red" />
                           </TouchableOpacity>
                           <View
                             style={{
@@ -187,11 +183,11 @@ class Keranjang extends Component {
                 </View>
               )}
             </View>
-
           </ScrollView>
-            <View style={{height: 20}} />
-           {this.state.token != '' && <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Checkout')}
+          <View style={{height: 20}} />
+          {this.state.token != '' && (
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Checkout')}
               style={{
                 backgroundColor: '#33c37d',
                 width: width - 40,
@@ -209,8 +205,8 @@ class Keranjang extends Component {
                 CHECKOUT
               </Text>
             </TouchableOpacity>
-}
-            <View style={{height: 20}} />
+          )}
+          <View style={{height: 20}} />
         </View>
       </View>
     );

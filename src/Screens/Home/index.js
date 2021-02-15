@@ -64,45 +64,42 @@ class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-            <ScrollView>
-        <View style={styles.header}>
-          <Image
-            source={require('../../Assets/Images/1.png')}
-            style={styles.drawer}
-          />
-          <View style={styles.screnHeader}>
-            <View style={{width: '50%'}}>
-              <Text style={styles.textHeader}>Hi FRIEND</Text>
-            </View>
-            <View style={styles.imageHeader}>
-              <Image
-                source={require('../../Assets/Images/g.png')}
-                style={styles.styleImageHeader}
-              />
+        <ScrollView>
+          <View style={styles.header}>
+            <Image
+              source={require('../../Assets/Images/1.png')}
+              style={styles.drawer}
+            />
+            <View style={styles.screnHeader}>
+              <View style={{width: '50%'}}>
+                <Text style={styles.textHeader}>Hi FRIEND</Text>
+              </View>
+              <View style={styles.imageHeader}>
+                <Image
+                  source={require('../../Assets/Images/g.png')}
+                  style={styles.styleImageHeader}
+                />
+              </View>
             </View>
           </View>
-        </View>
-        <LinearGradient
-          colors={['rgba(0,164,109,0.4)', 'transparent']}
-          style={{
-            left: 0,
-            right: 0,
-            height: 90,
-            marginTop: -45,
-          }}>
-          <TouchableOpacity 
-          onPress={() => this.props.navigation.navigate('Search')}
-          style={styles.screnSearch}>
-            <Text  style={styles.search}>
-          Search
-             
-              </Text>
-            <Image
-              source={require('../../Assets/Images/3.png')}
-              style={{height: 20, width: 20}}
-            />
-          </TouchableOpacity>
-        </LinearGradient>
+          <LinearGradient
+            colors={['rgba(0,164,109,0.4)', 'transparent']}
+            style={{
+              left: 0,
+              right: 0,
+              height: 90,
+              marginTop: -45,
+            }}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Search')}
+              style={styles.screnSearch}>
+              <Text style={styles.search}>Search</Text>
+              <Image
+                source={require('../../Assets/Images/3.png')}
+                style={{height: 20, width: 20}}
+              />
+            </TouchableOpacity>
+          </LinearGradient>
           <ScrollView
             // contentContainerStyle={{width:340,alignSelf:'center',}}
             style={{flex: 1}}>
@@ -179,7 +176,7 @@ class Home extends React.Component {
               <Text style={styles.textrecomendasi}>Recommended</Text>
               <View style={styles.gayarekomendasi} />
             </View> */}
-            {/* <View style={{width: '50%', alignItems: 'flex-end'}}>
+          {/* <View style={{width: '50%', alignItems: 'flex-end'}}>
             <View
               style={{
                 backgroundColor: '#00a46c',
@@ -274,12 +271,12 @@ class Home extends React.Component {
           </ScrollView>
           {this.state.loading ? (
             <View style={styles.viewLoading}>
-            <LottieView
-              autoPlay
-              style={{width: 120,height:120}}
-              source={require('../../Assets/Logo/890-loading-animation.json')}
-            />
-          </View>
+              <LottieView
+                autoPlay
+                style={{width: 120, height: 120}}
+                source={require('../../Assets/Logo/890-loading-animation.json')}
+              />
+            </View>
           ) : (
             <View>
               <View style={styles.rekomendasi}>
@@ -299,7 +296,7 @@ class Home extends React.Component {
                 }}>
                 {this.state.data.map((val, key) => {
                   return (
-                    <View key={key} >
+                    <View key={key}>
                       <TouchableOpacity
                         style={{
                           height: 250,
@@ -323,14 +320,14 @@ class Home extends React.Component {
                           />
                         </View>
                         <View style={styles.merekHarga}>
-                              <Text style={styles.gayaHarga}>
-                                {'Rp ' + val.harga}
-                              </Text>
+                          <Text style={styles.gayaHarga}>
+                            {'Rp ' + val.harga}
+                          </Text>
                           <Text
-                          numberOfLines={2}
+                            numberOfLines={2}
                             style={{
                               fontWeight: 'bold',
-                              paddingTop:10
+                              paddingTop: 10,
                             }}>
                             {val.name}
                           </Text>
@@ -445,7 +442,7 @@ const styles = StyleSheet.create({
   gayaHarga: {
     fontWeight: 'bold',
     color: '#00a46c',
-    fontSize:20,
+    fontSize: 20,
   },
   footerRecomendasi: {
     paddingHorizontal: 10,
@@ -463,6 +460,5 @@ const styles = StyleSheet.create({
     width: '95%',
     elevation: 2,
     marginVertical: 10,
-   
   },
 });
