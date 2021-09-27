@@ -17,8 +17,8 @@ import {
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-community/async-storage';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import ImagePicker from 'react-native-image-picker'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import ImagePicker from 'react-native-image-picker';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const byImage = require('../../Assets/Images/daftar.png');
 class Bukatoko extends Component {
   constructor() {
@@ -37,7 +37,7 @@ class Bukatoko extends Component {
       id_kurir: '',
       province: [],
       id_provinces: '',
-      avatar:{uri:''} ,
+      avatar: {uri: ''},
       photo: '',
     };
   }
@@ -129,46 +129,46 @@ class Bukatoko extends Component {
 
     const formData = new FormData();
 
-      formData.append('name_toko', name_toko );
-      formData.append(' alamat',  alamat);
-      formData.append('no_telpon', no_telpon);
-      formData.append(' no_rekening',  no_rekening);
-      formData.append(' id_provinces',  id_provinces);
-      formData.append(' id_kota',  id_kota);
-      formData.append('  id_kurir',   id_kurir);
-      formData.append('avatar', {
-        name: avatar.fileName,
-        type: avatar.type,
-        uri:
-          Platform.OS == 'android'
-            ? avatar.uri
-            : avatar.uri.replace('file://', ''),
-      });
-      console.log(formData);
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          // 'Content-Type': 'application/json',
-          Authorization: `Bearer ${this.state.token}`,
-        },
-        body: formData,
-      })
+    formData.append('name_toko', name_toko);
+    formData.append(' alamat', alamat);
+    formData.append('no_telpon', no_telpon);
+    formData.append(' no_rekening', no_rekening);
+    formData.append(' id_provinces', id_provinces);
+    formData.append(' id_kota', id_kota);
+    formData.append('  id_kurir', id_kurir);
+    formData.append('avatar', {
+      name: avatar.fileName,
+      type: avatar.type,
+      uri:
+        Platform.OS == 'android'
+          ? avatar.uri
+          : avatar.uri.replace('file://', ''),
+    });
+    console.log(formData);
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        // 'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.state.token}`,
+      },
+      body: formData,
+    })
       .then(respon => respon.json())
-        .then(resJson => {
-          console.log('ini seller', resJson);
-          if (resJson.status == 'success') {
-            this.props.navigation.navigate('Toko');
-            ToastAndroid.show(
-              'Toko anda sudah terdaftar',
-              ToastAndroid.SHORT,
-              ToastAndroid.CENTER,
-            );
-          }
-        })
-        .catch(error => {
-          console.log('errror ini ' + error);
-        });
+      .then(resJson => {
+        console.log('ini seller', resJson);
+        if (resJson.status == 'success') {
+          this.props.navigation.navigate('Toko');
+          ToastAndroid.show(
+            'Toko anda sudah terdaftar',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+          );
+        }
+      })
+      .catch(error => {
+        console.log('errror ini ' + error);
+      });
   };
   // fungsi photo
   createFormData = (photo, body) => {
@@ -187,7 +187,7 @@ class Bukatoko extends Component {
     Object.keys(body).forEach(key => {
       data.append(key, body[key]);
     });
-    console.log('ini form ',data);
+    console.log('ini form ', data);
     return data;
   };
 
@@ -314,32 +314,28 @@ class Bukatoko extends Component {
             </Picker>
 
             <View style={styles.foto}>
-            <TouchableOpacity style={styles.addFoto} activeOpacity={0.7}
-            onPress={() => this.handleChoosePhoto()}>
-            
-              {this.state.avatar.uri !== '' ? (
-              <Image
-                style={styles.profile}
-                source={{uri: this.state.avatar.uri}}
-              />
-            ) : (
-              <View>
-                <MaterialIcons name="add-a-photo" size={90} />
-              </View>
-            )}
-            
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity
+                style={styles.addFoto}
+                activeOpacity={0.7}
+                onPress={() => this.handleChoosePhoto()}>
+                {this.state.avatar.uri !== '' ? (
+                  <Image
+                    style={styles.profile}
+                    source={{uri: this.state.avatar.uri}}
+                  />
+                ) : (
+                  <View>
+                    <MaterialIcons name="add-a-photo" size={90} />
+                  </View>
+                )}
+              </TouchableOpacity>
+            </View>
           </View>
 
           <TouchableOpacity style={styles.tombol} onPress={() => this.toko()}>
             <Text style={{color: 'white', fontWeight: 'bold'}}>Buka Toko </Text>
           </TouchableOpacity>
-         
-
-
         </ScrollView>
-
 
         {/* tombol kembali */}
         <TouchableOpacity
@@ -419,7 +415,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   profile: {
-height:100,
-width:100
-  }
+    height: 100,
+    width: 100,
+  },
 });

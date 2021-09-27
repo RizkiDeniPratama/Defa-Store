@@ -23,20 +23,20 @@ class Tambahproduk extends Component {
   constructor() {
     super();
     this.state = {
-    name: '',
+      name: '',
       harga: '',
       stok: '',
       foto: '',
       photo: '',
       deskripsi: '',
-     id_kategori: '',
+      id_kategori: '',
       // token: '',
       loading: false,
-      image:{uri:''},
-      data:[]
+      image: {uri: ''},
+      data: [],
     };
   }
- 
+
   list = () => {
     console.log('sedang mengambil wilayah');
     const url = 'https://defa-store.herokuapp.com/api/kategori';
@@ -55,7 +55,6 @@ class Tambahproduk extends Component {
           this.setState({
             data: resJson.data,
             kurir: resJson.name,
-            
           });
         }
       })
@@ -65,23 +64,21 @@ class Tambahproduk extends Component {
   };
 
   tambah() {
-    const {
-    name,
-      harga,
-      stok,
-      photo,
-      deskripsi,
-     id_kategori,
-      image
-    } = this.state;
-    if (name !== '' && harga !== '' && stok !== '' && image !== '' && deskripsi !== '' &&id_kategori !== '') {
+    const {name, harga, stok, deskripsi, id_kategori, image} = this.state;
+    if (
+      name !== '' &&
+      harga !== '' &&
+      stok !== '' &&
+      image !== '' &&
+      deskripsi !== '' &&
+      id_kategori !== ''
+    ) {
       const body = {
-      name: name,
+        name: name,
         harga: harga,
         stok: stok,
         deskripsi: deskripsi,
-       id_kategori:id_kategori,
-         
+        id_kategori: id_kategori,
       };
       fetch('https://defa-store.herokuapp.com/api/seller/add_product', {
         method: 'POST',
@@ -90,18 +87,17 @@ class Tambahproduk extends Component {
           Authorization: `Bearer ${this.state.token}`,
         },
       })
-        .then((response) => response.json())
-        .then((response) => {
+        .then(response => response.json())
+        .then(response => {
           if (response) console.log('Berhasil di tampilkan.', response);
           alert('Data ditambahkan!');
           this.props.navigation.replace('TabNavigation', {screen: 'Home'});
         })
-        .catch((error) => {
+        .catch(error => {
           console.log('Upload error', error);
           alert('Gagal ditambahkan');
         });
-    } 
-    else {
+    } else {
       alert('Isi dengan benar');
     }
   }
@@ -118,7 +114,7 @@ class Tambahproduk extends Component {
           : photo.uri.replace('file://', ''),
     });
 
-    Object.keys(body).forEach((key) => {
+    Object.keys(body).forEach(key => {
       data.append(key, body[key]);
     });
 
@@ -128,7 +124,7 @@ class Tambahproduk extends Component {
     const options = {
       noData: true,
     };
-    ImagePicker.showImagePicker(options, (response) => {
+    ImagePicker.showImagePicker(options, response => {
       if (response.uri) {
         this.setState({image: response});
         console.log(this.state.image);
@@ -136,10 +132,10 @@ class Tambahproduk extends Component {
     });
   };
   componentDidMount() {
-    AsyncStorage.getItem('token').then((token) => {
+    AsyncStorage.getItem('token').then(token => {
       if (token != null) {
         this.setState({token: token});
-      this.list()
+        this.list();
         console.log('token ada');
       } else {
         console.log('token tidak ada');
@@ -172,20 +168,20 @@ class Tambahproduk extends Component {
             </TouchableOpacity>
           </View> */}
           <View style={styles.foto}>
-            <TouchableOpacity style={styles.addFoto} activeOpacity={0.7}
-            onPress={() => this.handleChoosePhoto()}>
-            
+            <TouchableOpacity
+              style={styles.addFoto}
+              activeOpacity={0.7}
+              onPress={() => this.handleChoosePhoto()}>
               {this.state.image.uri !== '' ? (
-              <Image
-                style={styles.profile}
-                source={{uri: this.state.image.uri}}
-              />
-            ) : (
-              <View>
-                <MaterialIcons name="add-a-photo" size={150} />
-              </View>
-            )}
-            
+                <Image
+                  style={styles.profile}
+                  source={{uri: this.state.image.uri}}
+                />
+              ) : (
+                <View>
+                  <MaterialIcons name="add-a-photo" size={150} />
+                </View>
+              )}
             </TouchableOpacity>
           </View>
           {/* nama barang */}
@@ -214,23 +210,22 @@ class Tambahproduk extends Component {
             />
           </View>
           {/* kategori */}
-        
+
           <View style={styles.inputView}>
             <View style={styles.headerName}>
-          <Text style={{fontWeight: 'bold',marginTop:10,}}>kategori</Text>
-          <Text style={{color: 'red'}}>*</Text>
-          </View>
-          <Picker
-            style={{width:330,marginLeft:15}}
+              <Text style={{fontWeight: 'bold', marginTop: 10}}>kategori</Text>
+              <Text style={{color: 'red'}}>*</Text>
+            </View>
+            <Picker
+              style={{width: 330, marginLeft: 15}}
               mode="dropdown"
               selectedValue={this.state.id_kategori}
               onValueChange={sel => this.setState({id_kategori: sel})}>
               {this.state.data.map((value, index) => (
                 <Picker.Item key={index} label={value.name} value={value.id} />
               ))}
-              
             </Picker>
-            </View>
+          </View>
           {/* harga */}
           <View style={styles.inputPrice}>
             <View style={styles.headerName}>
@@ -253,7 +248,6 @@ class Tambahproduk extends Component {
               <View style={{flexDirection: 'row'}}>
                 <Text style={{fontWeight: 'bold'}}>Stok</Text>
                 <Text style={{color: 'red'}}>*</Text>
-               
               </View>
               <TextInput
                 placeholder={'Atur Stok barang'}
@@ -264,7 +258,7 @@ class Tambahproduk extends Component {
             </View>
           </View>
           {/* tambah barang */}
-          <TouchableOpacity style={styles.nampil} onPress={() => this.tambah()}>
+          <TouchableOpacity style={styles.nampil} onPress={a => this.tambah()}>
             <Text
               style={{
                 alignSelf: 'center',
@@ -306,7 +300,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderStyle: 'dashed',
     borderRadius: 5,
-    
   },
   inputView: {
     backgroundColor: '#FFF',
@@ -361,7 +354,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   profile: {
-    height:150,
-    width:150
-      }
+    height: 150,
+    width: 150,
+  },
 });

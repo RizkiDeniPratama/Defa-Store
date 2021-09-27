@@ -9,7 +9,7 @@ import {
   Modal,
   ToastAndroid,
 } from 'react-native';
-import IonIcons from 'react-native-vector-icons/Ionicons';
+import IonIcons from 'ribu kota bosniaeact-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import {ScrollView} from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
